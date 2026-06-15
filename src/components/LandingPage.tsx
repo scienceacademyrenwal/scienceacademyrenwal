@@ -391,22 +391,33 @@ function LeadForm() {
               <p className="mt-2 text-white/80">Our admission counsellor will call you very soon.</p>
             </div>
           ) : (
-            <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+            <form
+              className="space-y-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const f = e.currentTarget as HTMLFormElement;
+                const get = (n: string) =>
+                  (f.elements.namedItem(n) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null)?.value || "";
+                const msg = `*New Admission Application — Science Academy*\n\nParent: ${get("parent")}\nStudent: ${get("student")}\nMobile: ${get("mobile")}\nEmail: ${get("email") || "—"}\nClass: ${get("klass")}\nMessage: ${get("message") || "—"}`;
+                sendToWhatsApp(msg);
+                setSent(true);
+              }}
+            >
               <h3 className="text-2xl font-bold mb-2">Apply for Admission</h3>
-              <input required placeholder="Parent's full name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
-              <input required placeholder="Student's name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+              <input name="parent" required placeholder="Parent's full name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+              <input name="student" required placeholder="Student's name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
               <div className="grid grid-cols-2 gap-3">
-                <input required type="tel" placeholder="Mobile" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
-                <input type="email" placeholder="Email (optional)" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+                <input name="mobile" required type="tel" placeholder="Mobile" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+                <input name="email" type="email" placeholder="Email (optional)" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
               </div>
-              <select className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white outline-none focus:border-gold">
-                <option className="text-navy">Class seeking admission</option>
+              <select name="klass" defaultValue="" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white outline-none focus:border-gold">
+                <option value="" className="text-navy">Class seeking admission</option>
                 {["Nursery", "LKG", "UKG", "Class 1-5", "Class 6-8", "Class 9-10", "Class 11-12"].map((c) => (
                   <option key={c} className="text-navy">{c}</option>
                 ))}
               </select>
-              <textarea placeholder="Message (optional)" rows={3} className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
-              <button className="w-full rounded-xl bg-gradient-gold text-navy font-semibold py-3.5 shadow-gold hover:brightness-105 transition">
+              <textarea name="message" placeholder="Message (optional)" rows={3} className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+              <button className="w-full rounded-xl bg-gradient-gold text-navy font-semibold py-3.5 shadow-gold hover:brightness-105 transition animate-pulse-glow">
                 Submit Application
               </button>
             </form>
