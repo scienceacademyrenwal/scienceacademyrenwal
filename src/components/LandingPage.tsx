@@ -492,8 +492,19 @@ function Footer() {
           </ul>
         </div>
       </div>
-      <div className="mt-12 pt-6 border-t border-white/10 text-center text-xs text-white/50">
-        © {new Date().getFullYear()} Science Academy Senior Secondary School. All rights reserved.
+      <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/50 px-6 max-w-7xl mx-auto">
+        <div>© {new Date().getFullYear()} Science Academy Senior Secondary School. All rights reserved.</div>
+        <div className="flex items-center gap-1.5">
+          Managed by{" "}
+          <a
+            href="https://www.instagram.com/creoclique"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold bg-gradient-to-r from-sky via-white to-gold bg-clip-text text-transparent hover:opacity-90 animate-shine"
+          >
+            CreocliQue
+          </a>
+        </div>
       </div>
     </footer>
   );
