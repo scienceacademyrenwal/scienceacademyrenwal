@@ -67,9 +67,9 @@ function Nav() {
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="mx-auto max-w-7xl px-4 md:px-6 mt-3">
         <div className="glass-light rounded-full px-4 md:px-6 py-2.5 flex items-center justify-between shadow-elegant">
-          <a href="#top" className="flex items-center gap-2">
-            <div className="size-9 rounded-full bg-gradient-hero grid place-items-center text-white shadow-glow">
-              <FlaskConical className="size-4" />
+          <a href="#top" className="flex items-center gap-2.5">
+            <div className="relative size-11 rounded-full overflow-hidden ring-2 ring-sky/30 shadow-glow animate-pulse-glow">
+              <img src={schoolLogo.url} alt="Science Academy logo" className="w-full h-full object-cover" />
             </div>
             <div className="leading-tight">
               <div className="font-display font-bold text-navy text-sm md:text-base">Science Academy</div>
