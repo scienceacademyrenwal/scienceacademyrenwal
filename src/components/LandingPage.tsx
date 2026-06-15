@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   Phone, MapPin, MessageCircle, GraduationCap, Trophy, Users, BookOpen,
   ShieldCheck, Sparkles, Play, ChevronDown, CheckCircle2, Star, Calendar,
-  FlaskConical, Microscope, Award, ArrowRight,
+  FlaskConical, Microscope, Award, ArrowRight, Atom, Beaker, Rocket,
 } from "lucide-react";
 import { AutoCarousel } from "./AutoCarousel";
 import s1 from "@/assets/slides/DSC_6547.jpg.asset.json";
@@ -15,6 +15,8 @@ import s7 from "@/assets/slides/DSC_6518.jpg.asset.json";
 import s8 from "@/assets/slides/DSC_6521.jpg.asset.json";
 import s9 from "@/assets/slides/DSC_6726.jpg.asset.json";
 import s10 from "@/assets/slides/DSC_6495.jpg.asset.json";
+import heroBuilding from "@/assets/hero-building.png.asset.json";
+import schoolLogo from "@/assets/logo.jpg.asset.json";
 
 const slides = [
   { url: s1.url, caption: "Grand Finale 2026 — Where every child shines on stage" },
@@ -29,7 +31,14 @@ const slides = [
   { url: s10.url, caption: "Founding family — a legacy of quality education" },
 ];
 
-const heroBg = s1.url;
+const heroBg = heroBuilding.url;
+const WHATSAPP_NUMBER = "919413686264";
+
+function sendToWhatsApp(message: string) {
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
 
 export function LandingPage() {
   return (
@@ -58,9 +67,9 @@ function Nav() {
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="mx-auto max-w-7xl px-4 md:px-6 mt-3">
         <div className="glass-light rounded-full px-4 md:px-6 py-2.5 flex items-center justify-between shadow-elegant">
-          <a href="#top" className="flex items-center gap-2">
-            <div className="size-9 rounded-full bg-gradient-hero grid place-items-center text-white shadow-glow">
-              <FlaskConical className="size-4" />
+          <a href="#top" className="flex items-center gap-2.5">
+            <div className="relative size-11 rounded-full overflow-hidden ring-2 ring-sky/30 shadow-glow animate-pulse-glow">
+              <img src={schoolLogo.url} alt="Science Academy logo" className="w-full h-full object-cover" />
             </div>
             <div className="leading-tight">
               <div className="font-display font-bold text-navy text-sm md:text-base">Science Academy</div>
@@ -84,18 +93,26 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero pt-24 pb-16">
-      {/* video / image background */}
+    <section id="top" className="relative min-h-screen flex items-center overflow-hidden bg-navy pt-24 pb-16">
+      {/* school building background */}
       <div className="absolute inset-0">
-        <img src={heroBg} alt="" className="w-full h-full object-cover opacity-25" />
-        <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy/85 to-sky/40" />
+        <img src={heroBg} alt="Science Academy campus" className="w-full h-full object-cover opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-br from-navy/95 via-navy/75 to-sky/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
       </div>
       {/* glowing orbs */}
       <div className="absolute -top-32 -left-20 size-[420px] rounded-full bg-sky/30 blur-3xl animate-float-slow" />
       <div className="absolute top-40 -right-20 size-[420px] rounded-full bg-gold/20 blur-3xl animate-float-slow" style={{ animationDelay: "2s" }} />
 
+      {/* floating science icons */}
+      <Atom className="absolute top-28 left-[8%] size-10 text-sky/40 animate-spin-slow hidden md:block" />
+      <Beaker className="absolute bottom-24 left-[12%] size-9 text-gold/50 animate-float-y hidden md:block" />
+      <Rocket className="absolute top-1/3 right-[6%] size-10 text-sky/40 animate-float-y hidden md:block" style={{ animationDelay: "1.5s" }} />
+      <Sparkles className="absolute bottom-32 right-[14%] size-8 text-gold/60 animate-float-x hidden md:block" />
+      <FlaskConical className="absolute top-1/2 left-[4%] size-8 text-white/30 animate-float-slow hidden lg:block" />
+
       <div className="relative mx-auto max-w-7xl px-6 grid lg:grid-cols-12 gap-10 items-center w-full">
-        <div className="lg:col-span-7 text-white">
+        <div className="lg:col-span-7 text-white animate-fade-up">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-white/90 text-xs font-medium mb-6">
             <Sparkles className="size-3.5 text-gold" /> Admissions Open · Session 2026-27
           </div>
@@ -137,19 +154,29 @@ function Hero() {
             <p className="text-white/70 text-sm mt-1">Our counsellor will call back within 1 working hour.</p>
             <form
               className="mt-5 space-y-3"
-              onSubmit={(e) => { e.preventDefault(); alert("Thank you! Our team will contact you shortly."); }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                const f = e.currentTarget as HTMLFormElement;
+                const name = (f.elements.namedItem("name") as HTMLInputElement)?.value || "";
+                const mobile = (f.elements.namedItem("mobile") as HTMLInputElement)?.value || "";
+                const klass = (f.elements.namedItem("klass") as HTMLSelectElement)?.value || "";
+                sendToWhatsApp(
+                  `*New Callback Request — Science Academy*\n\nParent: ${name}\nMobile: ${mobile}\nClass: ${klass}\n\nPlease contact me regarding admission.`
+                );
+                f.reset();
+              }}
             >
-              <input required placeholder="Parent's name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
-              <input required type="tel" placeholder="Mobile number" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
-              <select className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white outline-none focus:border-gold">
-                <option className="text-navy">Class seeking admission</option>
+              <input name="name" required placeholder="Parent's name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+              <input name="mobile" required type="tel" placeholder="Mobile number" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+              <select name="klass" defaultValue="" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white outline-none focus:border-gold">
+                <option value="" className="text-navy">Class seeking admission</option>
                 <option className="text-navy">Pre-Primary (Nursery–KG)</option>
                 <option className="text-navy">Primary (1–5)</option>
                 <option className="text-navy">Middle (6–8)</option>
                 <option className="text-navy">Secondary (9–10)</option>
                 <option className="text-navy">Sr. Secondary (11–12)</option>
               </select>
-              <button className="w-full rounded-xl bg-gradient-gold text-navy font-semibold py-3.5 shadow-gold hover:brightness-105 transition">
+              <button className="w-full rounded-xl bg-gradient-gold text-navy font-semibold py-3.5 shadow-gold hover:brightness-105 transition animate-pulse-glow">
                 Request a Callback
               </button>
             </form>
@@ -364,22 +391,33 @@ function LeadForm() {
               <p className="mt-2 text-white/80">Our admission counsellor will call you very soon.</p>
             </div>
           ) : (
-            <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+            <form
+              className="space-y-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const f = e.currentTarget as HTMLFormElement;
+                const get = (n: string) =>
+                  (f.elements.namedItem(n) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null)?.value || "";
+                const msg = `*New Admission Application — Science Academy*\n\nParent: ${get("parent")}\nStudent: ${get("student")}\nMobile: ${get("mobile")}\nEmail: ${get("email") || "—"}\nClass: ${get("klass")}\nMessage: ${get("message") || "—"}`;
+                sendToWhatsApp(msg);
+                setSent(true);
+              }}
+            >
               <h3 className="text-2xl font-bold mb-2">Apply for Admission</h3>
-              <input required placeholder="Parent's full name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
-              <input required placeholder="Student's name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+              <input name="parent" required placeholder="Parent's full name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+              <input name="student" required placeholder="Student's name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
               <div className="grid grid-cols-2 gap-3">
-                <input required type="tel" placeholder="Mobile" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
-                <input type="email" placeholder="Email (optional)" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+                <input name="mobile" required type="tel" placeholder="Mobile" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+                <input name="email" type="email" placeholder="Email (optional)" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
               </div>
-              <select className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white outline-none focus:border-gold">
-                <option className="text-navy">Class seeking admission</option>
+              <select name="klass" defaultValue="" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white outline-none focus:border-gold">
+                <option value="" className="text-navy">Class seeking admission</option>
                 {["Nursery", "LKG", "UKG", "Class 1-5", "Class 6-8", "Class 9-10", "Class 11-12"].map((c) => (
                   <option key={c} className="text-navy">{c}</option>
                 ))}
               </select>
-              <textarea placeholder="Message (optional)" rows={3} className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
-              <button className="w-full rounded-xl bg-gradient-gold text-navy font-semibold py-3.5 shadow-gold hover:brightness-105 transition">
+              <textarea name="message" placeholder="Message (optional)" rows={3} className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+              <button className="w-full rounded-xl bg-gradient-gold text-navy font-semibold py-3.5 shadow-gold hover:brightness-105 transition animate-pulse-glow">
                 Submit Application
               </button>
             </form>
@@ -427,7 +465,7 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-6 grid md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <div className="size-10 rounded-full bg-gradient-hero grid place-items-center shadow-glow"><FlaskConical className="size-4 text-white" /></div>
+            <div className="size-12 rounded-full overflow-hidden ring-2 ring-sky/30 shadow-glow"><img src={schoolLogo.url} alt="Science Academy logo" className="w-full h-full object-cover" /></div>
             <div>
               <div className="font-display font-bold text-white">Science Academy</div>
               <div className="text-xs text-white/60">Senior Secondary School · A Quality Education Center</div>
@@ -454,8 +492,19 @@ function Footer() {
           </ul>
         </div>
       </div>
-      <div className="mt-12 pt-6 border-t border-white/10 text-center text-xs text-white/50">
-        © {new Date().getFullYear()} Science Academy Senior Secondary School. All rights reserved.
+      <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/50 px-6 max-w-7xl mx-auto">
+        <div>© {new Date().getFullYear()} Science Academy Senior Secondary School. All rights reserved.</div>
+        <div className="flex items-center gap-1.5">
+          Managed by{" "}
+          <a
+            href="https://www.instagram.com/creoclique"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold bg-gradient-to-r from-sky via-white to-gold bg-clip-text text-transparent hover:opacity-90 animate-shine"
+          >
+            CreocliQue
+          </a>
+        </div>
       </div>
     </footer>
   );
