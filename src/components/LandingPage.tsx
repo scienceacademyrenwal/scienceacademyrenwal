@@ -93,18 +93,26 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero pt-24 pb-16">
-      {/* video / image background */}
+    <section id="top" className="relative min-h-screen flex items-center overflow-hidden bg-navy pt-24 pb-16">
+      {/* school building background */}
       <div className="absolute inset-0">
-        <img src={heroBg} alt="" className="w-full h-full object-cover opacity-25" />
-        <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy/85 to-sky/40" />
+        <img src={heroBg} alt="Science Academy campus" className="w-full h-full object-cover opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-br from-navy/95 via-navy/75 to-sky/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
       </div>
       {/* glowing orbs */}
       <div className="absolute -top-32 -left-20 size-[420px] rounded-full bg-sky/30 blur-3xl animate-float-slow" />
       <div className="absolute top-40 -right-20 size-[420px] rounded-full bg-gold/20 blur-3xl animate-float-slow" style={{ animationDelay: "2s" }} />
 
+      {/* floating science icons */}
+      <Atom className="absolute top-28 left-[8%] size-10 text-sky/40 animate-spin-slow hidden md:block" />
+      <Beaker className="absolute bottom-24 left-[12%] size-9 text-gold/50 animate-float-y hidden md:block" />
+      <Rocket className="absolute top-1/3 right-[6%] size-10 text-sky/40 animate-float-y hidden md:block" style={{ animationDelay: "1.5s" }} />
+      <Sparkles className="absolute bottom-32 right-[14%] size-8 text-gold/60 animate-float-x hidden md:block" />
+      <FlaskConical className="absolute top-1/2 left-[4%] size-8 text-white/30 animate-float-slow hidden lg:block" />
+
       <div className="relative mx-auto max-w-7xl px-6 grid lg:grid-cols-12 gap-10 items-center w-full">
-        <div className="lg:col-span-7 text-white">
+        <div className="lg:col-span-7 text-white animate-fade-up">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-white/90 text-xs font-medium mb-6">
             <Sparkles className="size-3.5 text-gold" /> Admissions Open · Session 2026-27
           </div>
