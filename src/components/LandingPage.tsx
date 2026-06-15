@@ -465,7 +465,7 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-6 grid md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <div className="size-10 rounded-full bg-gradient-hero grid place-items-center shadow-glow"><FlaskConical className="size-4 text-white" /></div>
+            <div className="size-12 rounded-full overflow-hidden ring-2 ring-sky/30 shadow-glow"><img src={schoolLogo.url} alt="Science Academy logo" className="w-full h-full object-cover" /></div>
             <div>
               <div className="font-display font-bold text-white">Science Academy</div>
               <div className="text-xs text-white/60">Senior Secondary School · A Quality Education Center</div>
