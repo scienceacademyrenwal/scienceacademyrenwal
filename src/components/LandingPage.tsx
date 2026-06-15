@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   Phone, MapPin, MessageCircle, GraduationCap, Trophy, Users, BookOpen,
   ShieldCheck, Sparkles, Play, ChevronDown, CheckCircle2, Star, Calendar,
-  FlaskConical, Microscope, Award, ArrowRight,
+  FlaskConical, Microscope, Award, ArrowRight, Atom, Beaker, Rocket,
 } from "lucide-react";
 import { AutoCarousel } from "./AutoCarousel";
 import s1 from "@/assets/slides/DSC_6547.jpg.asset.json";
@@ -15,6 +15,8 @@ import s7 from "@/assets/slides/DSC_6518.jpg.asset.json";
 import s8 from "@/assets/slides/DSC_6521.jpg.asset.json";
 import s9 from "@/assets/slides/DSC_6726.jpg.asset.json";
 import s10 from "@/assets/slides/DSC_6495.jpg.asset.json";
+import heroBuilding from "@/assets/hero-building.png.asset.json";
+import schoolLogo from "@/assets/logo.jpg.asset.json";
 
 const slides = [
   { url: s1.url, caption: "Grand Finale 2026 — Where every child shines on stage" },
@@ -29,7 +31,14 @@ const slides = [
   { url: s10.url, caption: "Founding family — a legacy of quality education" },
 ];
 
-const heroBg = s1.url;
+const heroBg = heroBuilding.url;
+const WHATSAPP_NUMBER = "919413686264";
+
+function sendToWhatsApp(message: string) {
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
 
 export function LandingPage() {
   return (
