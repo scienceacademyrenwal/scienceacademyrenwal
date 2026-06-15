@@ -154,19 +154,29 @@ function Hero() {
             <p className="text-white/70 text-sm mt-1">Our counsellor will call back within 1 working hour.</p>
             <form
               className="mt-5 space-y-3"
-              onSubmit={(e) => { e.preventDefault(); alert("Thank you! Our team will contact you shortly."); }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                const f = e.currentTarget as HTMLFormElement;
+                const name = (f.elements.namedItem("name") as HTMLInputElement)?.value || "";
+                const mobile = (f.elements.namedItem("mobile") as HTMLInputElement)?.value || "";
+                const klass = (f.elements.namedItem("klass") as HTMLSelectElement)?.value || "";
+                sendToWhatsApp(
+                  `*New Callback Request — Science Academy*\n\nParent: ${name}\nMobile: ${mobile}\nClass: ${klass}\n\nPlease contact me regarding admission.`
+                );
+                f.reset();
+              }}
             >
-              <input required placeholder="Parent's name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
-              <input required type="tel" placeholder="Mobile number" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
-              <select className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white outline-none focus:border-gold">
-                <option className="text-navy">Class seeking admission</option>
+              <input name="name" required placeholder="Parent's name" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+              <input name="mobile" required type="tel" placeholder="Mobile number" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 outline-none focus:border-gold" />
+              <select name="klass" defaultValue="" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-white outline-none focus:border-gold">
+                <option value="" className="text-navy">Class seeking admission</option>
                 <option className="text-navy">Pre-Primary (Nursery–KG)</option>
                 <option className="text-navy">Primary (1–5)</option>
                 <option className="text-navy">Middle (6–8)</option>
                 <option className="text-navy">Secondary (9–10)</option>
                 <option className="text-navy">Sr. Secondary (11–12)</option>
               </select>
-              <button className="w-full rounded-xl bg-gradient-gold text-navy font-semibold py-3.5 shadow-gold hover:brightness-105 transition">
+              <button className="w-full rounded-xl bg-gradient-gold text-navy font-semibold py-3.5 shadow-gold hover:brightness-105 transition animate-pulse-glow">
                 Request a Callback
               </button>
             </form>
