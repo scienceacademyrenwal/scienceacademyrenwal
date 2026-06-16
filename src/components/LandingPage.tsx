@@ -49,7 +49,10 @@ export function LandingPage() {
       <section id="gallery" className="bg-navy">
         <AutoCarousel slides={slides} interval={2000} />
       </section>
+      <QuickAccess />
+      <Principal />
       <Why />
+      <News />
       <Tour />
       <Achievements />
       <Process />
@@ -59,6 +62,120 @@ export function LandingPage() {
       <Footer />
       <WhatsAppFab />
     </div>
+  );
+}
+
+function QuickAccess() {
+  const items = [
+    { icon: ClipboardList, label: "Admissions", href: "#apply" },
+    { icon: CalendarDays, label: "Calendar", href: "#news" },
+    { icon: UtensilsCrossed, label: "School Meals", href: "#why" },
+    { icon: Bus, label: "Transportation", href: "#why" },
+    { icon: BookOpen, label: "Curriculum", href: "#why" },
+    { icon: Briefcase, label: "Careers", href: "#apply" },
+  ];
+  return (
+    <section className="bg-navy">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 -mt-px">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 border-t border-white/10">
+          {items.map(({ icon: Icon, label, href }) => (
+            <a key={label} href={href} className="group relative flex flex-col items-center justify-center gap-2 py-7 px-4 text-white/85 border-r border-b border-white/10 hover:bg-sky/20 transition">
+              <Icon className="size-6 text-gold group-hover:scale-110 transition" />
+              <span className="text-xs md:text-sm font-semibold tracking-wide uppercase">{label}</span>
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-gold group-hover:w-2/3 transition-all duration-300" />
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Principal() {
+  return (
+    <section className="py-20 bg-secondary relative overflow-hidden">
+      <div className="absolute -top-20 -right-20 size-[400px] rounded-full bg-sky/10 blur-3xl" />
+      <div className="relative mx-auto max-w-7xl px-6 grid lg:grid-cols-12 gap-10 items-center">
+        <div className="lg:col-span-5">
+          <div className="relative rounded-3xl overflow-hidden shadow-elegant aspect-[4/5] max-w-md mx-auto">
+            <img src={slides[5].url} alt="Principal of Science Academy" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
+            <div className="absolute bottom-5 left-5 right-5 text-white">
+              <div className="text-xs uppercase tracking-widest text-gold">Principal</div>
+              <div className="text-xl font-bold">Dr. R. K. Sharma</div>
+            </div>
+          </div>
+        </div>
+        <div className="lg:col-span-7">
+          <div className="text-xs font-bold tracking-[0.2em] uppercase text-sky">A Message From Our Principal</div>
+          <h2 className="mt-3 text-3xl md:text-5xl font-extrabold text-navy text-balance">"Every child is a unique spark waiting to light the world."</h2>
+          <Quote className="size-10 text-gold/70 mt-6" />
+          <p className="mt-4 text-foreground/80 text-lg leading-relaxed">
+            At Science Academy, we believe education is more than marks — it is the foundation of character, curiosity and confidence. Our dedicated faculty, modern infrastructure and value-based teaching ensure every student is prepared not just for exams, but for life. We warmly invite you to be a part of our growing family.
+          </p>
+          <div className="mt-6 flex items-center gap-4">
+            <div className="h-px flex-1 bg-border" />
+            <div className="font-display font-bold text-navy">— Dr. R. K. Sharma, Principal</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function News() {
+  const news = [
+    { tag: "Highlight", img: slides[0].url, title: "Grand Finale 2026 lights up our annual day", date: "March 22, 2026" },
+    { tag: "Academics", img: slides[7].url, title: "Class XII students shine in RBSE board results", date: "May 14, 2026" },
+    { tag: "Culture", img: slides[3].url, title: "State-level dance championship — Gold for our team", date: "Feb 08, 2026" },
+  ];
+  const announcements = [
+    { icon: Bell, title: "Admissions Open 2026-27", desc: "Limited seats in Nursery to Class XI. Apply early to reserve." },
+    { icon: CalendarDays, title: "Parent-Teacher Meet", desc: "Saturday, July 18 · 10:00 AM at the school auditorium." },
+    { icon: Newspaper, title: "Summer Enrichment Program", desc: "Robotics, dance & sports camps — registrations now open." },
+  ];
+  return (
+    <section id="news" className="py-20">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="text-center">
+          <div className="text-xs font-bold tracking-[0.2em] uppercase text-sky">News From Our School</div>
+          <h2 className="mt-3 text-3xl md:text-5xl font-extrabold text-navy">Recent Highlights</h2>
+          <div className="mt-4 mx-auto h-0.5 w-16 bg-gold" />
+        </div>
+        <div className="mt-12 grid lg:grid-cols-3 gap-6">
+          {news.map((n) => (
+            <article key={n.title} className="group rounded-2xl overflow-hidden border bg-card hover:shadow-elegant transition">
+              <div className="aspect-[16/10] overflow-hidden relative">
+                <img src={n.img} alt={n.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+                <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gradient-gold text-navy text-[10px] font-bold uppercase tracking-wider">{n.tag}</span>
+              </div>
+              <div className="p-6">
+                <div className="text-xs text-muted-foreground">{n.date}</div>
+                <h3 className="mt-2 font-bold text-navy text-lg leading-snug">{n.title}</h3>
+                <a href="#news" className="mt-4 inline-flex items-center gap-1 text-sky text-sm font-semibold hover:gap-2 transition-all">Read story <ArrowRight className="size-4" /></a>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-16">
+          <div className="text-center">
+            <div className="text-xs font-bold tracking-[0.2em] uppercase text-sky">Announcements</div>
+            <div className="mt-3 mx-auto h-0.5 w-16 bg-gold" />
+          </div>
+          <div className="mt-8 grid md:grid-cols-3 gap-5">
+            {announcements.map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="relative rounded-2xl bg-gradient-to-br from-navy to-sky text-white p-6 overflow-hidden hover:shadow-elegant transition">
+                <Icon className="size-8 text-gold" />
+                <h3 className="mt-4 font-bold text-lg">{title}</h3>
+                <p className="mt-2 text-sm text-white/80">{desc}</p>
+                <div className="absolute -bottom-8 -right-8 size-28 rounded-full bg-white/5" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
