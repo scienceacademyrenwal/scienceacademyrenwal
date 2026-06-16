@@ -281,7 +281,7 @@ function Tour() {
 
 function Achievements() {
   const items = [
-    { img: slides[2].url, name: "District Topper · Class XII", note: "Science Stream — 96.4%" },
+    { img: slides[2].url, name: "Grand Finale 2026", note: "Science Stream — 96.4%" },
     { img: slides[3].url, name: "Best Cultural Troupe 2026", note: "Inter-School Festival, Jaipur" },
     { img: slides[1].url, name: "State Dance Championship", note: "Gold Medal — Junior Group" },
   ];
