@@ -48,7 +48,6 @@ export function LandingPage() {
       <section id="gallery" className="bg-navy">
         <AutoCarousel slides={slides} interval={2000} />
       </section>
-      <Stats />
       <Why />
       <Tour />
       <Achievements />
