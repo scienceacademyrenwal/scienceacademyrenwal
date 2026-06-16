@@ -499,7 +499,7 @@ function Footer() {
             href="https://www.instagram.com/creoclique"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold bg-gradient-to-r from-sky via-white to-gold bg-clip-text text-transparent hover:opacity-90 animate-shine"
+            className="font-semibold text-gold hover:opacity-90 transition"
           >
             CreocliQue
           </a>
