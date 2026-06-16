@@ -3,6 +3,7 @@ import {
   Phone, MapPin, MessageCircle, GraduationCap, Trophy, Users, BookOpen,
   ShieldCheck, Sparkles, Play, ChevronDown, CheckCircle2, Star, Calendar,
   FlaskConical, Microscope, Award, ArrowRight, Atom, Beaker, Rocket,
+  CalendarDays, Bus, UtensilsCrossed, ClipboardList, Briefcase, Quote, Bell, Newspaper,
 } from "lucide-react";
 import { AutoCarousel } from "./AutoCarousel";
 import s1 from "@/assets/slides/DSC_6547.jpg.asset.json";
