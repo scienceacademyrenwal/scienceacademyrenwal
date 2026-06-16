@@ -18,6 +18,9 @@ import s9 from "@/assets/slides/DSC_6726.jpg.asset.json";
 import s10 from "@/assets/slides/DSC_6495.jpg.asset.json";
 import heroBuilding from "@/assets/hero-building.png.asset.json";
 import schoolLogo from "@/assets/logo.jpg.asset.json";
+import founderImg from "@/assets/team/founder.jpg.asset.json";
+import directorImg from "@/assets/team/director.jpg.asset.json";
+import principalImg from "@/assets/team/principal.jpg.asset.json";
 
 const slides = [
   { url: s1.url, caption: "Grand Finale 2026 — Where every child shines on stage" },
@@ -50,7 +53,7 @@ export function LandingPage() {
         <AutoCarousel slides={slides} interval={2000} />
       </section>
       <QuickAccess />
-      <Principal />
+      <Leadership />
       <Why />
       <News />
       <Tour />
@@ -91,32 +94,81 @@ function QuickAccess() {
   );
 }
 
-function Principal() {
+function Leadership() {
+  const people = [
+    {
+      role: "Founder's Desk",
+      name: "Moti Singh",
+      designation: "Founder",
+      img: founderImg.url,
+      message:
+        "Science Academy was born from a simple belief — that every child in our region deserves world-class education rooted in strong values. For decades we have nurtured curiosity, character and confidence. Welcome to our family.",
+    },
+    {
+      role: "Director's Desk",
+      name: "RK Singar",
+      designation: "Director",
+      img: directorImg.url,
+      message:
+        "Our vision is to blend modern pedagogy with timeless values. From smart classrooms to sports and science labs, every resource here is designed to help your child discover their true potential and thrive globally.",
+    },
+    {
+      role: "Principal's Desk",
+      name: "Chetna Singh",
+      designation: "Principal",
+      img: principalImg.url,
+      message:
+        "At Science Academy, learning is joyful, personal and purposeful. Our dedicated educators mentor each child with care — building academic excellence alongside empathy, creativity and leadership. We warmly welcome you.",
+    },
+  ];
+
   return (
-    <section className="py-20 bg-secondary relative overflow-hidden">
-      <div className="absolute -top-20 -right-20 size-[400px] rounded-full bg-sky/10 blur-3xl" />
-      <div className="relative mx-auto max-w-7xl px-6 grid lg:grid-cols-12 gap-10 items-center">
-        <div className="lg:col-span-5">
-          <div className="relative rounded-3xl overflow-hidden shadow-elegant aspect-[4/5] max-w-md mx-auto">
-            <img src={slides[5].url} alt="Principal of Science Academy" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
-            <div className="absolute bottom-5 left-5 right-5 text-white">
-              <div className="text-xs uppercase tracking-widest text-gold">Principal</div>
-              <div className="text-xl font-bold">Dr. R. K. Sharma</div>
-            </div>
-          </div>
-        </div>
-        <div className="lg:col-span-7">
-          <div className="text-xs font-bold tracking-[0.2em] uppercase text-sky">A Message From Our Principal</div>
-          <h2 className="mt-3 text-3xl md:text-5xl font-extrabold text-navy text-balance">"Every child is a unique spark waiting to light the world."</h2>
-          <Quote className="size-10 text-gold/70 mt-6" />
-          <p className="mt-4 text-foreground/80 text-lg leading-relaxed">
-            At Science Academy, we believe education is more than marks — it is the foundation of character, curiosity and confidence. Our dedicated faculty, modern infrastructure and value-based teaching ensure every student is prepared not just for exams, but for life. We warmly invite you to be a part of our growing family.
+    <section id="leadership" className="py-20 md:py-28 relative overflow-hidden" style={{ background: "linear-gradient(180deg,#F8FAFC 0%,#EEF4FB 100%)" }}>
+      <div className="absolute -top-24 -left-24 size-[420px] rounded-full bg-sky/10 blur-3xl animate-float-slow" />
+      <div className="absolute -bottom-24 -right-24 size-[420px] rounded-full bg-gold/10 blur-3xl animate-float-slow" />
+      <div className="relative mx-auto max-w-7xl px-4 md:px-6">
+        <div className="text-center max-w-2xl mx-auto">
+          <div className="text-xs font-bold tracking-[0.25em] uppercase text-sky">Our Leadership</div>
+          <h2 className="mt-3 text-3xl md:text-5xl font-extrabold text-balance" style={{ color: "#0F4C81" }}>
+            Guided by Vision, Driven by Values
+          </h2>
+          <p className="mt-4 text-foreground/70">
+            Meet the visionaries shaping every child's journey at Science Academy.
           </p>
-          <div className="mt-6 flex items-center gap-4">
-            <div className="h-px flex-1 bg-border" />
-            <div className="font-display font-bold text-navy">— Dr. R. K. Sharma, Principal</div>
-          </div>
+        </div>
+
+        <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {people.map((p, i) => (
+            <article
+              key={p.name}
+              className="group relative rounded-3xl p-6 md:p-7 bg-white/70 backdrop-blur-xl border border-white/60 shadow-elegant hover:-translate-y-2 hover:shadow-glow transition-all duration-500 animate-fade-up"
+              style={{ animationDelay: `${i * 120}ms` }}
+            >
+              <span className="absolute -top-3 left-6 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase text-white shadow-md" style={{ background: "linear-gradient(90deg,#0F4C81,#3B82F6)" }}>
+                {p.role}
+              </span>
+
+              <div className="relative mx-auto w-40 h-40 md:w-44 md:h-44 rounded-full p-[3px] animate-float-y" style={{ background: "conic-gradient(from 0deg,#3B82F6,#FBBF24,#0F4C81,#3B82F6)" }}>
+                <div className="w-full h-full rounded-full overflow-hidden bg-white">
+                  <img src={p.img} alt={`${p.name}, ${p.designation} of Science Academy`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                </div>
+                <span className="absolute -bottom-1 -right-1 size-9 rounded-full grid place-items-center text-navy shadow-md" style={{ background: "#FBBF24" }}>
+                  <Quote className="size-4" />
+                </span>
+              </div>
+
+              <div className="mt-5 text-center">
+                <h3 className="text-xl font-extrabold" style={{ color: "#1F2937" }}>{p.name}</h3>
+                <div className="mt-1 text-sm font-semibold tracking-wide uppercase" style={{ color: "#3B82F6" }}>{p.designation}</div>
+              </div>
+
+              <p className="mt-4 text-sm md:text-[15px] leading-relaxed text-foreground/75 text-center">
+                "{p.message}"
+              </p>
+
+              <div className="mt-5 h-1 w-16 mx-auto rounded-full bg-gradient-to-r from-sky to-gold group-hover:w-28 transition-all duration-500" />
+            </article>
+          ))}
         </div>
       </div>
     </section>
