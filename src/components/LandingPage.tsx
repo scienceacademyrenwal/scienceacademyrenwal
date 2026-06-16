@@ -48,7 +48,6 @@ export function LandingPage() {
       <section id="gallery" className="bg-navy">
         <AutoCarousel slides={slides} interval={2000} />
       </section>
-      <Stats />
       <Why />
       <Tour />
       <Achievements />
@@ -282,7 +281,7 @@ function Tour() {
 
 function Achievements() {
   const items = [
-    { img: slides[2].url, name: "District Topper · Class XII", note: "Science Stream — 96.4%" },
+    { img: slides[2].url, name: "Grand Finale 2026", note: "Science Stream — 96.4%" },
     { img: slides[3].url, name: "Best Cultural Troupe 2026", note: "Inter-School Festival, Jaipur" },
     { img: slides[1].url, name: "State Dance Championship", note: "Gold Medal — Junior Group" },
   ];
@@ -500,7 +499,7 @@ function Footer() {
             href="https://www.instagram.com/creoclique"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold bg-gradient-to-r from-sky via-white to-gold bg-clip-text text-transparent hover:opacity-90 animate-shine"
+            className="font-semibold text-gold hover:opacity-90 transition"
           >
             CreocliQue
           </a>
